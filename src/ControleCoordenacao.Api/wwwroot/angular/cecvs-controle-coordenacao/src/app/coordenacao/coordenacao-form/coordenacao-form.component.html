@@ -1,0 +1,31 @@
+<form class="needs-validation" novalidate [formGroup]="form" style="padding-top: 10px">
+  <div class="form-row">
+    <div class="col-sm-12 mb-3">
+      <label for="nome">Coordenação</label>
+      <input type="text" class="form-control" placeholder="Nome da Coordenação" id="nome" formControlName="nome">
+      <div class="valid-feedback">
+        Nome válido!
+      </div>
+    </div>
+
+    <div class="col-sm-12 mb-3">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="email">@</span>
+        </div>
+        <input type="text" class="form-control" aria-describedby="email" placeholder="Caixa Postal" id="caixaPostal" formControlName="caixaPostal">
+      </div>
+      <!-- <div class="invalid-feedback">
+            Example invalid input group feedback
+          </div> -->
+    </div>
+  </div>
+  <div>
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+    {{' '}}
+    <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+  </div>
+
+
+
+</form>

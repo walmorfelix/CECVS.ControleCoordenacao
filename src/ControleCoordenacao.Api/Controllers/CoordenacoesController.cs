@@ -1,9 +1,12 @@
 ﻿using ControleCoordenacao.Domain.Interfaces.Repositories;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 
 namespace ControleCoordenacoes.Api.Controllers
 {
+    [EnableCors("AllowOrigin")]
     [Route("api/[Controller]")]
     [ApiController]
     public class CoordenacoesController:ControllerBase
@@ -15,12 +18,16 @@ namespace ControleCoordenacoes.Api.Controllers
             _coordenacaoRepository = coordenacaoRepository;
         }
 
-        [HttpGet("get-all")]        
+        [HttpGet]        
         public IActionResult GetCoordenacoes()
         {
             try
             {
-                var coordenacoes = _coordenacaoRepository.GetAll();
+                var coordenacoes = _coordenacaoRepository
+                    .GetAll()
+                    .ToList()
+                    .Where(c=>c.Ativo == true);
+
                 return Ok(coordenacoes);
             }
             catch (Exception e)

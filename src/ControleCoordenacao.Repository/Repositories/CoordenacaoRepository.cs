@@ -16,7 +16,7 @@ namespace ControleCoordenacao.Repository.Repositories
         {
             Add(new Coordenacao()
             {
-                Id = 1,
+                //Id = 1,
                 Nome = "Governança",
                 CaixaPostal = "caixa01@caixa.gov.br",
                 Ativo = true
@@ -24,7 +24,7 @@ namespace ControleCoordenacao.Repository.Repositories
 
             Add(new Coordenacao()
             {
-                Id = 2,
+                //Id = 2,
                 Nome = "Operações",
                 CaixaPostal = "caixa02@caixa.gov.br",
                 Ativo = true
@@ -32,7 +32,7 @@ namespace ControleCoordenacao.Repository.Repositories
 
             Add(new Coordenacao()
             {
-                Id = 3,
+                //Id = 3,
                 Nome = "Inovação e Tecnologia",
                 CaixaPostal = "caixa03@caixa.gov.br",
                 Ativo = true
