@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, MinLengthValidator } from '@angular/forms';
+import { CoordenacaoService } from '../coordenacao.service';
+import { coordenacao } from '../coordenacao';
 
 @Component({
   selector: 'app-coordenacao-form',
@@ -9,8 +11,9 @@ import { FormGroup, FormBuilder, Validators, MinLengthValidator } from '@angular
 export class CoordenacaoFormComponent implements OnInit {
   form: FormGroup;
   submitted:boolean = false;
+  coordenacao:coordenacao;
 
-  constructor(private fb:FormBuilder) { }
+  constructor(private fb:FormBuilder, private service:CoordenacaoService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -25,16 +28,18 @@ export class CoordenacaoFormComponent implements OnInit {
 
   onSubmit(){
     this.submitted = true;
-    if(this.form.valid){
-      console.log(this.form.value)
+    if(this.form.valid){ 
+      this.coordenacao = Object.assign({},this.coordenacao, this.form.value)        
       
-    }
-
+      this.service.Add(this.coordenacao).subscribe(
+        success => console.log('sucesso'),
+        error => console.log(error)        
+      );      
+    };
   }
   onCancel(){
     this.submitted = false;
     this.form.reset();
     console.log("cancela");
-
-  }
+  };
 }

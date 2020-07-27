@@ -14,31 +14,55 @@ namespace ControleCoordenacao.Repository.Repositories
     {
         public CoordenacaoRepository(ControleCoordenacaoContext context) : base(context)
         {
-            Add(new Coordenacao()
+            if (context.Coordenacoes.Count(n => n.Nome == "Governança") == 0)
             {
-                //Id = 1,
-                Nome = "Governança",
-                CaixaPostal = "caixa01@caixa.gov.br",
-                Ativo = true
-            });
+                Add(new Coordenacao()
+                {
+                    Id = 1,
+                    Nome = "Governança",
+                    CaixaPostal = "caixa01@caixa.gov.br",
+                    Ativo = true
+                });
 
-            Add(new Coordenacao()
+                context.SaveChanges();
+            }
+
+            if (context.Coordenacoes.Count(n => n.Nome == "Operações") == 0)
             {
-                //Id = 2,
-                Nome = "Operações",
-                CaixaPostal = "caixa02@caixa.gov.br",
-                Ativo = true
-            });
+                Add(new Coordenacao()
+                {
+                    Id = 2,
+                    Nome = "Operações",
+                    CaixaPostal = "caixa02@caixa.gov.br",
+                    Ativo = true
+                });
 
-            Add(new Coordenacao()
+                context.SaveChanges();
+            }
+
+            if (context.Coordenacoes.Count(n => n.Nome == "Inovação e Tecnologia") == 0)
             {
-                //Id = 3,
-                Nome = "Inovação e Tecnologia",
-                CaixaPostal = "caixa03@caixa.gov.br",
-                Ativo = true
-            });
+                Add(new Coordenacao()
+                {
+                    Id = 3,
+                    Nome = "Inovação e Tecnologia",
+                    CaixaPostal = "caixa03@caixa.gov.br",
+                    Ativo = true
+                });
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }            
+        }
+
+        public bool CoordenacaoExiste(string nome)
+        {
+            return Context.Coordenacoes
+                .Count(c=>c.Nome == nome) > 0;
+        }
+
+        public int ObterId()
+        {
+            return Context.Coordenacoes.Max(c => c.Id);
         }
     }
 }

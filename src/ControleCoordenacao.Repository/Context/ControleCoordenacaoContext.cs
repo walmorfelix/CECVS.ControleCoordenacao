@@ -11,7 +11,7 @@ namespace ControleCoordenacao.Repository.Context
         public DbSet<Empregado> Empregados { get; set; }
 
         public ControleCoordenacaoContext(DbContextOptions options) : base(options)
-        {
+        {            
         }        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

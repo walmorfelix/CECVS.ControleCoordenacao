@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Coordenacao.cs" />
+    <Compile Include="Entities\Dto\CoordenacaoDto.cs" />
     <Compile Include="Entities\Empregado.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Interfaces\Repositories\IBaseRepository.cs" />

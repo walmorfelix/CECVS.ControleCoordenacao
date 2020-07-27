@@ -4,5 +4,7 @@ namespace ControleCoordenacao.Domain.Interfaces.Repositories
 {
     public interface ICoordenacaoRepository:IBaseRepository<Coordenacao>
     {
+        int ObterId();
+        bool CoordenacaoExiste(string nome);
     }
 }

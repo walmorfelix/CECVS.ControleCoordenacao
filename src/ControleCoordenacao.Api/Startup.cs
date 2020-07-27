@@ -24,7 +24,16 @@ namespace ControleCoordenacao.Api
         {            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<ControleCoordenacaoContext>(opt => opt.UseInMemoryDatabase("InMemoryProvider"));
-            services.AddCors(cors => cors.AddPolicy("AllowOrigin", opt => opt.AllowAnyOrigin()));
+            services.AddCors(options =>
+            {
+                options.AddPolicy("Development",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });          
+
+
 
             services.AddScoped<DbContext, ControleCoordenacaoContext>();
             services.AddScoped<ICoordenacaoRepository, CoordenacaoRepository>();
@@ -46,7 +55,7 @@ namespace ControleCoordenacao.Api
             //app.ApplicationServices.GetService<ControleCoordenacaoContext>();
             app.UseHttpsRedirection();
             app.UseMvc();
-            app.UseCors(opt=>opt.AllowAnyOrigin());
+            app.UseCors("Development");            
         }
     }
 }
