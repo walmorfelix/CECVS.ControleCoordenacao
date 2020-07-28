@@ -16,41 +16,55 @@ namespace ControleCoordenacao.Repository.Repositories
         {
             if (context.Coordenacoes.Count(n => n.Nome == "Governança") == 0)
             {
-                Add(new Coordenacao()
+                var empregado = new Empregado()
                 {
-                    Id = 1,
+                    //Id = 1,
+                    //Coordenacao = coordenacao,
+                    Matricula = "c000001",
+                    Nome = "Gabriel dos Santos",
+                    Ativo = true
+                };
+                var empregados = new List<Empregado>();
+
+                empregados.Add(empregado);
+
+                var coordenacao = new Coordenacao()
+                {
+                    //Id = 1,
+                    Empregados = empregados,
                     Nome = "Governança",
                     CaixaPostal = "caixa01@caixa.gov.br",
                     Ativo = true
-                });
+                };
 
-                context.SaveChanges();
+                Add(coordenacao);
+                //context.SaveChanges();
             }
 
             if (context.Coordenacoes.Count(n => n.Nome == "Operações") == 0)
             {
                 Add(new Coordenacao()
                 {
-                    Id = 2,
+                    //Id = 2,
                     Nome = "Operações",
                     CaixaPostal = "caixa02@caixa.gov.br",
                     Ativo = true
                 });
 
-                context.SaveChanges();
+                //context.SaveChanges();
             }
 
             if (context.Coordenacoes.Count(n => n.Nome == "Inovação e Tecnologia") == 0)
             {
                 Add(new Coordenacao()
                 {
-                    Id = 3,
+                    //Id = 3,
                     Nome = "Inovação e Tecnologia",
                     CaixaPostal = "caixa03@caixa.gov.br",
                     Ativo = true
                 });
 
-                context.SaveChanges();
+                //context.SaveChanges();
             }            
         }
 
