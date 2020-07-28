@@ -9,7 +9,7 @@ namespace ControleCoordenacao.Repository.Config
         public void Configure(EntityTypeBuilder<Empregado> builder)
         {
             builder.HasKey(e => e.Id);
-            builder.HasOne(e => e.Coordenacao);
+            //builder.HasOne(e => e.Coordenacao);
         }
     }
 }

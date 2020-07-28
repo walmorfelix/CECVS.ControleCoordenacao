@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace ControleCoordenacao.Api
 {
@@ -21,8 +23,16 @@ namespace ControleCoordenacao.Api
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {            
+        {
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddMvc().AddJsonOptions(options => {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
+
+
             services.AddDbContext<ControleCoordenacaoContext>(opt => opt.UseInMemoryDatabase("InMemoryProvider"));
             services.AddCors(options =>
             {
@@ -33,11 +43,11 @@ namespace ControleCoordenacao.Api
                     .AllowCredentials());
             });          
 
-
-
             services.AddScoped<DbContext, ControleCoordenacaoContext>();
             services.AddScoped<ICoordenacaoRepository, CoordenacaoRepository>();
-            services.AddScoped<IEmpregadoRepository, EmpregadoRepository>();            
+            services.AddScoped<IEmpregadoRepository, EmpregadoRepository>();
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

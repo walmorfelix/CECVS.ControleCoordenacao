@@ -1,53 +1,53 @@
 <div class="card mt-3">
-    <div class="card-header">
-      <div class="float-left">
-        <h4>Coordenação</h4>
-      </div>
-      <div class="float-right">
-        <button type="button" class="btn btn-primary" [routerLink]="['novo']">Nova Coordenação</button>       
-        <button type="button" class="btn btn-secondary" (click)="onRefresh()">Atualizar</button>
-      </div>
+  <div class="card-header">
+    <div class="float-left">
+      <h4>Coordenação</h4>
     </div>
-    <div class="card-body">
-      <table class="table table-hover">
-          <!-- <table class="table table-hover" *ngIf="(coordenacoes$ | async) as coordenacoes; else loading"></table> -->
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Coordenação</th>
-            <th>Caixa Postal</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let coordenacao of coordenacoes">
-            <td>{{ coordenacao.id }}</td>
-            <td>{{ coordenacao.nome }}</td>
-            <td>{{ coordenacao.caixaPostal }}</td>
-            <td>
-              <span class="float-right">
-                <button class="btn btn-outline-warning mb-1 btn-sm">
-                  Atualizar
-                </button>
-  
-                <button class="btn btn-outline-danger mb-1 btn-sm">
-                  Remover
-                </button>
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-  
-      <ng-template #loading>
-        <span>Carregando Coordenações...</span>
-      </ng-template>
+    <div class="float-right">
+      <button type="button" class="btn btn-primary" [routerLink]="['novo']">Nova Coordenação</button>
+      <!-- <button type="button" class="btn btn-secondary" (click)="onRefresh()">Atualizar</button> -->
     </div>
   </div>
-  
-  <ng-template #deleteModal>
-    <div class="modal-body text-center">
-      <p>Tem certeza que deseja remover esse curso?</p>
-      <button type="button" class="btn btn-default" (click)="onConfirmDelete()">Sim</button>
-      <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">Nao</button>
-    </div>
-  </ng-template>
+  <div class="card-body">
+    <table class="table table-hover">
+      <!-- <table class="table table-hover" *ngIf="(coordenacoes$ | async) as coordenacoes; else loading"></table> -->
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Coordenação</th>
+          <th>Caixa Postal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let coordenacao of coordenacoes">
+          <td>{{ coordenacao.coordenacaoId }}</td>
+          <td>{{ coordenacao.nome }}</td>
+          <td>{{ coordenacao.caixaPostal }}</td>
+          <td>
+            <span class="float-right">
+              <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(coordenacao.coordenacaoId)">
+                Atualizar
+              </button>
+
+              <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onRemove(coordenacao.coordenacaoId)">
+                Remover
+              </button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #loading>
+      <span>Carregando Coordenações...</span>
+    </ng-template>
+  </div>
+</div>
+
+<ng-template #deleteModal>
+  <div class="modal-body text-center">
+    <p>Tem certeza que deseja remover esse curso?</p>
+    <button type="button" class="btn btn-default" (click)="onConfirmDelete()">Sim</button>
+    <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">Nao</button>
+  </div>
+</ng-template>

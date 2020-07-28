@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { coordenacao } from './coordenacao';
-
-import { pipe } from '../../../node_modules/@angular/core/src/render3';
-import { post } from '../../../node_modules/@types/selenium-webdriver/http';
-import { Observable } from '../../../node_modules/rxjs';
-import { take, map, catchError } from "rxjs/operators";
+import { coordenacao} from './coordenacao';
+import { take } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +20,31 @@ export class CoordenacaoService {
   GetAll() {
     return this.http.get<coordenacao[]>(this.api + "/get-all");
   }
-  Add(coordenacao: coordenacao) {
+
+  Add(coordenacao) {
+    
+    coordenacao.id = 0;    
     let response = this.http
       .post(this.api + "/add", coordenacao)
       .pipe(take(1)
       );
     return response;
+  }
+  LoadById(id){
+    return this.http.get(this.api + "/" + id).pipe(take(1));
+  }
+
+  Update(coordenacao: coordenacao){
+    return this.http.put(this.api + "/alterar", coordenacao).pipe(take(1));
+  }
+
+  Save(coordenacao){
+    if (coordenacao.id !=null){
+      console.log(coordenacao)
+      return this.Update(coordenacao)
+    }
+    else{
+      return this.Add(coordenacao)
+    }
   }
 }

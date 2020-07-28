@@ -26,18 +26,20 @@ namespace ControleCoordenacao.Repository.Repositories
 
         public TEntity GetById(int id)
         {
-            return Context.Set<TEntity>().Find(id);
+            return Context.Set<TEntity>().Find(id);            
         }
 
         public void Remove(TEntity entity)
         {
-            Context.Set<TEntity>().Update(entity);
+            var entry = Context.Entry(entity);
+            Context.Attach(entity);
+            entry.State = EntityState.Modified;            
             Context.SaveChanges();
         }
 
         public void Update(TEntity entity)
         {
-            Context.Set<TEntity>().Update(entity);
+            Context.Set<TEntity>().Update(entity);            
             Context.SaveChanges();
         }
 

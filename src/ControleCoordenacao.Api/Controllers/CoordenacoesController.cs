@@ -1,15 +1,18 @@
 ﻿using ControleCoordenacao.Domain.Entities;
+using ControleCoordenacao.Domain.Entities.Dto;
 using ControleCoordenacao.Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ControleCoordenacoes.Api.Controllers
-{   [EnableCors("Development")]
+{
+    [EnableCors("Development")]
     [Route("api/[Controller]")]
     [ApiController]
-    public class CoordenacoesController:ControllerBase
+    public class CoordenacoesController : ControllerBase
     {
         private readonly ICoordenacaoRepository _coordenacaoRepository;
 
@@ -17,18 +20,32 @@ namespace ControleCoordenacoes.Api.Controllers
         {
             _coordenacaoRepository = coordenacaoRepository;
         }
-        
-        [HttpGet("get-all")]        
+
+        [HttpGet("get-all")]
         public IActionResult GetCoordenacoes()
         {
             try
             {
                 var coordenacoes = _coordenacaoRepository
-                    .GetAll()
-                    .ToList()
-                    .Where(c=>c.Ativo == true);
+                    .ListarCoodenacao()
+                    .ToList();
 
-                return Ok(coordenacoes);
+                var coordenacoesDto = new List<CoordenacaoDto>();
+                foreach (var coordenacao in coordenacoes)
+                {
+                    var coordenacaoDto = new CoordenacaoDto
+                    {
+                        CoordenacaoId = coordenacao.Id,
+                        Nome = coordenacao.Nome,
+                        CaixaPostal = coordenacao.CaixaPostal,
+                        Empregados = coordenacao.Empregados.ToList(),
+                        Ativo = coordenacao.Ativo
+                    };
+
+                    coordenacoesDto.Add(coordenacaoDto);
+                }
+
+                return Ok(coordenacoesDto);
             }
             catch (Exception e)
             {
@@ -52,12 +69,44 @@ namespace ControleCoordenacoes.Api.Controllers
 
                     return Ok($"CoordenacaoId:{coordenacao.Id}");
                 }
-                return Ok("Coordenação já existe");                
+                return Ok("Coordenação já existe");
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetCoordenacaoById(int id)
+       {
+            try
+            {
+                return Ok(_coordenacaoRepository.CoordenacaoById(id));
+
+            }
+            catch (Exception e)
+            {
+               return BadRequest(e.Message);
+            }             
+        }
+
+        [HttpPut("alterar")]
+        public IActionResult PutCoordenacao(Coordenacao coordenacao)
+        {
+            try
+            {
+                _coordenacaoRepository.Update(coordenacao);
+
+                return Ok("Alteração: coordenacaoId:" + coordenacao.Id);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
+
+
     }
 }

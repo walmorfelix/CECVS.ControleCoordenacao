@@ -8,7 +8,16 @@ namespace ControleCoordenacao.Domain.Entities.Dto
 {
     public class CoordenacaoDto
     {
-        public string nome { get; set; }
-        public string caixaPostal { get; set; }
+        public int CoordenacaoId { get; set; }
+        public string Nome { get; set; }
+        public string CaixaPostal { get; set; }
+        public bool Ativo { get; set; }
+        public List<Empregado> Empregados { get; set; }
+
+        public CoordenacaoDto()
+        {
+            Empregados = new List<Empregado>();
+            Ativo = true;
+        }
     }
 }
