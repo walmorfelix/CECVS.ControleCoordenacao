@@ -13,18 +13,18 @@
       <!-- <table class="table table-hover" *ngIf="(coordenacoes$ | async) as coordenacoes; else loading"></table> -->
       <thead>
         <tr>
-          <th>#</th>
-          <th>Coordenação</th>
+          <th>#</th>          
           <th>Matrícula</th>
           <th>Nome</th>
+          <th>Coordenação</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let empregado of empregados">
           <td>{{ empregado.id }}</td>
-          <td>{{ empregado.coordenacao }}</td>
           <td>{{ empregado.matricula }}</td>
           <td>{{ empregado.nome }}</td>
+          <td>{{ empregado.coordenacao }}</td>
           <td>
             <span class="float-right">
               <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(empregado.id)">

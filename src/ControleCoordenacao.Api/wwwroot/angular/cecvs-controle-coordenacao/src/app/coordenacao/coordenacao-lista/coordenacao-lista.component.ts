@@ -1,7 +1,11 @@
+import { Location } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { CoordenacaoService } from '../coordenacao.service';
 import { coordenacao } from '../coordenacao';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AlertModalService } from '../../shared/alert-modal-service';
 
 
 @Component({
@@ -12,16 +16,22 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class CoordenacaoListaComponent implements OnInit {
   coordenacoes: coordenacao[];
+  coordenacoes$:Observable<coordenacao[]>;
+  //bsModalRef:BsModalRef;
 
   constructor(
     private service: CoordenacaoService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private alertService: AlertModalService,
+    private location:Location)  { }
 
   ngOnInit() {
 
-    this.service.GetAll()
-      .subscribe(data => this.coordenacoes = data);
+    // this.service.GetAll()
+    //   .subscribe(data => this.coordenacoes = data);
+
+    this.coordenacoes$ = this.service.GetAll();
 
 
   }
@@ -33,10 +43,12 @@ export class CoordenacaoListaComponent implements OnInit {
 
   onRemove(coordenacaoId){
     this.service.Remove(coordenacaoId)
-      .subscribe(
-        success=>{},
-        error=>{}
+      .subscribe( data => console.log(data)
       );
+  }
+
+  handleError(){
+  this.alertService.ShowAlertDanger('erro');
   }
     
 }

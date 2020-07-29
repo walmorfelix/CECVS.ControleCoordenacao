@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+
 import { FormGroup, FormBuilder, Validators, MinLengthValidator } from '@angular/forms';
 import { CoordenacaoService } from '../coordenacao.service';
 import { coordenacao } from '../coordenacao';
 import { ActivatedRoute } from '@angular/router';
+import { AlertModalService } from '../../shared/alert-modal-service';
 
 @Component({
   selector: 'app-coordenacao-form',
@@ -17,7 +20,9 @@ export class CoordenacaoFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service: CoordenacaoService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modal: AlertModalService,
+    private location:Location
 
   ) { }
 
@@ -53,19 +58,25 @@ export class CoordenacaoFormComponent implements OnInit {
   }
 
   hasError(field: string) {
-    return this.form.get(field).errors
+    //return this.form.get(field).errors
   }
 
   onSubmit() {
     this.submitted = true;
     if (this.form.valid) {
-      console.log(this.form);
+      //console.log(this.form);
       this.coordenacao = Object.assign({}, this.coordenacao, this.form.value)
 
-      console.log(this.coordenacao);
+      //console.log(this.coordenacao);
       this.service.Save(this.coordenacao).subscribe(
-        success=>{},
-        error=>{}
+        success=>{
+          //this.modal.ShowAlertSuccess("Coordenação criada com sucesso");
+          this.location.back();
+        },
+        error=>{
+          //this.modal.ShowAlertDanger("Erro na inclusão");
+          this.location.back();
+        }
       )  
     };
   }
