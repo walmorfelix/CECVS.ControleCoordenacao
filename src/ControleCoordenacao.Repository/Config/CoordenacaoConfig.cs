@@ -11,8 +11,8 @@ namespace ControleCoordenacao.Repository.Config
             builder.HasKey(c => c.Id);
 
             builder
-                .HasMany(c => c.Empregados);
-                //.WithOne(e=>e.Coordenacao);
+                .HasMany(c => c.Empregados)
+                .WithOne(e=>e.Coordenacao);
         }
     }
 }

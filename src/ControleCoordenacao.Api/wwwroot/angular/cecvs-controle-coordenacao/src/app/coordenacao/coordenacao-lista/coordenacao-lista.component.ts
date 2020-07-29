@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CoordenacaoService } from '../coordenacao.service';
-import { coordenacao } from '../Coordenacao';
+import { coordenacao } from '../coordenacao';
 import { Router, ActivatedRoute } from '@angular/router';
 
 

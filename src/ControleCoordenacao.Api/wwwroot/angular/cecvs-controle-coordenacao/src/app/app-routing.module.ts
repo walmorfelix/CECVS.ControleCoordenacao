@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CoordenacaoFormComponent } from './coordenacao/coordenacao-form/coordenacao-form.component';
 
 const routes: Routes = [
   {

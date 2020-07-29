@@ -116,9 +116,9 @@ namespace ControleCoordenacoes.Api.Controllers
                 {
                     var coordenacao = _coordenacaoRepository.CoordenacaoById(id).SingleOrDefault();
                     _coordenacaoRepository.Remove(coordenacao);
-                    return Ok($"Removido: {id}");
+                    return Ok($"Removido: CoordenacaoId = {id}");
                 }
-                return Forbid("Não é permitido exclusão de coordenação com empregados vinculados");
+                return Ok("Não é permitido exclusão de coordenação com empregados vinculados");
 
             }
             catch (Exception e )

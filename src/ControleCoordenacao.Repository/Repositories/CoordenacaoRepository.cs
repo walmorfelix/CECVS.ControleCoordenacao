@@ -12,91 +12,46 @@ namespace ControleCoordenacao.Repository.Repositories
 {
     public class CoordenacaoRepository : BaseRepository<Coordenacao>, ICoordenacaoRepository
     {
+        
+
         public CoordenacaoRepository(ControleCoordenacaoContext context) : base(context)
         {
-            if (context.Coordenacoes.Count(n => n.Nome == "Governança") == 0 )
+            if (context.Coordenacoes.Count() == 0)
             {
-                var empregados = new List<Empregado>
+                if (context.Coordenacoes.Count(n => n.Nome == "Governança") == 0)
                 {
-                    new Empregado
+                    Add(new Coordenacao()
                     {
-                        //EmpregadoId = 1,                    
-                        //CoordenacaoId = 1,
-                        Matricula = "c000001",
-                        Nome = "Gabriel dos Santos",
+                        Nome = "Governança",
+                        CaixaPostal = "caixa01@caixa.gov.br",
                         Ativo = true
-                    }
-                };
+                    });
+                }
 
-                var coordenacao = new Coordenacao()
+                if (context.Coordenacoes.Count(n => n.Nome == "Operações") == 0)
                 {
-                    //CoordenacaoId = 1,
-                    Empregados = empregados,
-                    Nome = "Governança",
-                    CaixaPostal = "caixa01@caixa.gov.br",
-                    Ativo = true
-                };
+                    Add(new Coordenacao()
+                    {
+                        //CoordenacaoId = 1,                        
+                        Nome = "Operações",
+                        CaixaPostal = "caixa02@caixa.gov.br",
+                        Ativo = true
+                    });
+                }
 
-                Add(coordenacao);
+                if (context.Coordenacoes.Count(n => n.Nome == "Inovação e Tecnologia") == 0)
+                {
+                    Add(new Coordenacao()
+                    {
+                        //CoordenacaoId = 1,                        
+                        Nome = "Inovação e Tecnologia",
+                        CaixaPostal = "caixa03@caixa.gov.br",
+                        Ativo = true
+                    });
+                }               
+
             }
 
-            if (context.Coordenacoes.Count(n => n.Nome == "Operações") == 0)
-            {
-                var empregados = new List<Empregado>
-                {
-                    new Empregado()
-                    {
-                        Matricula = "c000002",
-                        Nome = "Alice Araujo",
-                        Ativo = true
-                    }
-                };
-
-                var coordenacao = new Coordenacao()
-                {
-                    //CoordenacaoId = 1,
-                    Empregados = empregados,
-                    Nome = "Operações",
-                    CaixaPostal = "caixa02@caixa.gov.br",
-                    Ativo = true
-                };
-
-                Add(coordenacao);
-            }
-
-            if (context.Coordenacoes.Count(n => n.Nome == "Inovação e Tecnologia") == 0)
-            {
-                var empregados = new List<Empregado>
-                {
-                    new Empregado()
-                    {
-                        //EmpregadoId = 3,
-                        //CoordenacaoId = 3,
-                        Matricula = "c000003",
-                        Nome = "Rafael da Silva",
-                        Ativo = true
-                    },
-                    new Empregado()
-                    {
-                        //EmpregadoId = 4,
-                        //CoordenacaoId = 3,
-                        Matricula = "c000004",
-                        Nome = "Tereza Cristina",
-                        Ativo = true
-                    }
-                };
-
-                var coordenacao = new Coordenacao()
-                {
-                    //CoordenacaoId = 1,
-                    Empregados = empregados,
-                    Nome = "Inovação e Tecnologia",
-                    CaixaPostal = "caixa03@caixa.gov.br",
-                    Ativo = true
-                };
-
-                Add(coordenacao);
-            }
         }
 
         public void AtualizarCoordenacao(Coordenacao coordenacao)
@@ -136,5 +91,6 @@ namespace ControleCoordenacao.Repository.Repositories
                      .Empregados
                      .Count() > 0;            
         }
+
     }
 }

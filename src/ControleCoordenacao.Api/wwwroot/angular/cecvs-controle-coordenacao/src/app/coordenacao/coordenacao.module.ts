@@ -7,7 +7,6 @@ import { CoordenacaoListaComponent } from './coordenacao-lista/coordenacao-lista
 import { CoordenacaoFormComponent } from './coordenacao-form/coordenacao-form.component';
 
 
-
 @NgModule({
   declarations: [CoordenacaoListaComponent, CoordenacaoFormComponent],
   imports: [

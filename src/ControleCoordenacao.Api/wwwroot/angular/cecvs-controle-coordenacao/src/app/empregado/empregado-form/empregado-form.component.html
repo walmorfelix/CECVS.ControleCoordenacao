@@ -1,0 +1,36 @@
+<form class="needs-validation" novalidate [formGroup]="form" style="padding-top: 10px">
+  <div class="form-row">
+
+    <div class="col-sm-12 mb-3">
+      <label for="matricula">Matrícula</label>
+      <input type="text" class="form-control" [readonly]="bloquearEdicao" placeholder="Matrícula" id="matricula" formControlName="matricula">
+      <div class="valid-feedback">
+        Nome válido!
+      </div>
+    </div>
+
+    <div class="col-sm-12 mb-3">
+      <label for="nome">Nome</label>
+      <input type="text" class="form-control" placeholder="Nome do Empregado" id="nome" formControlName="nome">
+      <div class="valid-feedback">
+        Nome válido!
+      </div>
+    </div>
+
+    <div class="col-sm-12 mb-3">
+      <label for="coordenacao">Coordenação</label>
+      <input type="text" class="form-control" placeholder="Nome da Coordenação" id="coordenacao" formControlName="coordenacao">
+      <div class="valid-feedback">
+        Nome válido!
+      </div>
+    </div>
+  </div>
+  <div>
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+    {{' '}}
+    <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+  </div>
+
+
+
+</form>
