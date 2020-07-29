@@ -107,6 +107,26 @@ namespace ControleCoordenacoes.Api.Controllers
             }
         }
 
+        [HttpDelete("remover/{id:int}")]
+        public IActionResult DeleteCoordenacao(int id)
+        {
+            try
+            {
+                if (!_coordenacaoRepository.TemEmpregado(id))
+                {
+                    var coordenacao = _coordenacaoRepository.CoordenacaoById(id).SingleOrDefault();
+                    _coordenacaoRepository.Remove(coordenacao);
+                    return Ok($"Removido: {id}");
+                }
+                return Forbid("Não é permitido exclusão de coordenação com empregados vinculados");
+
+            }
+            catch (Exception e )
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
 
     }
 }

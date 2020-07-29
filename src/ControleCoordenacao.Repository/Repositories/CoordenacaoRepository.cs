@@ -129,5 +129,12 @@ namespace ControleCoordenacao.Repository.Repositories
             return Context.Coordenacoes.Max(c => c.Id);
         }
 
+        public bool TemEmpregado(int id)
+        {
+           return CoordenacaoById(id)
+                     .FirstOrDefault()
+                     .Empregados
+                     .Count() > 0;            
+        }
     }
 }

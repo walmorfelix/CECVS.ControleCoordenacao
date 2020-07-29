@@ -66,26 +66,7 @@ export class CoordenacaoFormComponent implements OnInit {
       this.service.Save(this.coordenacao).subscribe(
         success=>{},
         error=>{}
-      )
-
-
-      // if (this.form.value.id){ //Se existe fazer update, se não existe criar
-      //   this.coordenacao = Object.assign({}, this.coordenacao, this.form.value)//bind para o backend receber
-        
-      //   this.service.Update(this.coordenacao).subscribe(
-      //     success => console.log('sucesso'),
-      //     error => console.log(error)
-      //   );
-
-      // }
-      // else{ 
-      //   //Criar        
-      //   this.coordenacao = Object.assign({}, this.coordenacao, this.form.value)//bind para o backend receber
-      //   this.service.Add(this.coordenacao).subscribe(
-      //     success => console.log('sucesso'),
-      //     error => console.log(error)
-      //   );
-      // }     
+      )  
     };
   }
   onCancel() {

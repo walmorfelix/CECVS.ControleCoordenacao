@@ -47,4 +47,9 @@ export class CoordenacaoService {
       return this.Add(coordenacao)
     }
   }
+
+  Remove(id){
+    console.log(id);
+    return this.http.delete(this.api + "/remover/" + id).pipe(take(1));
+  }
 }

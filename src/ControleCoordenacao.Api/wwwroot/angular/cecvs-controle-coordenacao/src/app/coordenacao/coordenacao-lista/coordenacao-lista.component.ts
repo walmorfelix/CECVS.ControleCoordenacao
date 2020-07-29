@@ -30,4 +30,13 @@ export class CoordenacaoListaComponent implements OnInit {
     this.router.navigate(['editar', coordenacaoId], { relativeTo: this.route })
     console.log(coordenacaoId);
   }
+
+  onRemove(coordenacaoId){
+    this.service.Remove(coordenacaoId)
+      .subscribe(
+        success=>{},
+        error=>{}
+      );
+  }
+    
 }

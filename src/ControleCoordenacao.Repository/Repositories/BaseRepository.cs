@@ -31,9 +31,7 @@ namespace ControleCoordenacao.Repository.Repositories
 
         public void Remove(TEntity entity)
         {
-            var entry = Context.Entry(entity);
-            Context.Attach(entity);
-            entry.State = EntityState.Modified;            
+            Context.Set<TEntity>().Remove(entity);
             Context.SaveChanges();
         }
 
@@ -41,6 +39,11 @@ namespace ControleCoordenacao.Repository.Repositories
         {
             Context.Set<TEntity>().Update(entity);            
             Context.SaveChanges();
+
+            //var entry = Context.Entry(entity);
+            //Context.Attach(entity);
+            //entry.State = EntityState.Modified;
+            //Context.SaveChanges();
         }
 
         public void Dispose()
