@@ -1,4 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+
 import { FormGroup, FormBuilder, Validators, MinLengthValidator } from '@angular/forms';
 import { EmpregadoService } from '../empregado.service';
 import { empregado } from '../empregado';
@@ -15,11 +17,14 @@ export class EmpregadoFormComponent implements OnInit {
   submitted: boolean = false;
   empregado: empregado;
   bloquearEdicao : boolean = false;
+  coordenacoes = [];
+  
 
   constructor(
     private fb: FormBuilder,
     private service: EmpregadoService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location:Location
 
   ) { }
 
@@ -73,8 +78,12 @@ export class EmpregadoFormComponent implements OnInit {
 
       console.log(this.empregado);
       this.service.Save(this.empregado).subscribe(
-        success=>{},
-        error=>{}
+        success=>{
+          this.location.back();
+        },
+        error=>{
+          this.location.back();
+        }
       )  
     };
   }

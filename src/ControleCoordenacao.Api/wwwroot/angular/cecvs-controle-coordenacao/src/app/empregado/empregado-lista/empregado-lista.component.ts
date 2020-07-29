@@ -31,8 +31,12 @@ export class EmpregadoListaComponent implements OnInit {
   onRemove(empregadoId){
     this.service.Remove(empregadoId)
       .subscribe(
-        success=>{},
-        error=>{}
+        success=>{
+          window.location.reload();
+        },
+        error=>{
+          window.location.reload();
+        }
       );
   }
     

@@ -43,8 +43,9 @@ export class CoordenacaoListaComponent implements OnInit {
 
   onRemove(coordenacaoId){
     this.service.Remove(coordenacaoId)
-      .subscribe( data => console.log(data)
-      );
+      .subscribe(
+        success=>{window.location.reload()},
+        error=>{window.location.reload()});     
   }
 
   handleError(){
