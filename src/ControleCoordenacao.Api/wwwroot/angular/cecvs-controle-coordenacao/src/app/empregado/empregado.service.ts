@@ -42,7 +42,7 @@ export class EmpregadoService {
   Save(empregado){
     if (empregado.id !=null){
       console.log(empregado)
-      return this.Update(empregado)
+      return this.Update(empregado)      
     }
     else{
       return this.Add(empregado)
@@ -53,5 +53,10 @@ export class EmpregadoService {
     console.log(id);
     return this.http.delete(this.api + "/remover/" + id).pipe(take(1));
   }
+
+    
+  EmpregadosPorCoordenacao(coordenacaoId){
+    return this.http.get(this.api +"/empregados-coordenacao/"+coordenacaoId).pipe(take(1));
+  }                      
 }
 

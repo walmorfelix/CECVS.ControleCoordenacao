@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { EmpregadoService } from '../empregado.service';
-import { empregado } from '../empregado';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertModalService } from '../../shared/alert-modal-service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -19,6 +19,7 @@ export class EmpregadoListaComponent implements OnInit {
     private service: EmpregadoService,
     private router: Router,
     private route: ActivatedRoute,
+    private location:Location,
     private alertModal:AlertModalService,
     private modalService: BsModalService) { }
 
@@ -28,13 +29,12 @@ export class EmpregadoListaComponent implements OnInit {
       (params:any)=> {
         const id = params['id'];
 
-        if(id){ //Carrega o formulário se estiver passando id
-          
-          // const empregado$ = this.service.EmpregadosPorCoordenacao(id);
-        
-          // empregado$.subscribe(empregados=>{                      
-          //   this.empregados = empregados;
-          // });
+        if(id){//Carrega o formulário se estiver passando id
+
+          const empregado$ = this.service.EmpregadosPorCoordenacao(id);        
+          empregado$.subscribe(empregados=>{                      
+            this.empregados = empregados;
+          });          
         }else{
               
           this.service.GetAll()
@@ -43,12 +43,10 @@ export class EmpregadoListaComponent implements OnInit {
         }
       }
     )
-
-
   }
 
   onEdit(empregadoId) {
-    this.router.navigate(['editar', empregadoId], { relativeTo: this.route })
+    this.router.navigate(['editarEmpregado', empregadoId], { relativeTo: this.route })
     console.log(empregadoId);
   }
 

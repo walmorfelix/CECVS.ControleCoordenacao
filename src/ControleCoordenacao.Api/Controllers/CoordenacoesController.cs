@@ -99,9 +99,16 @@ namespace ControleCoordenacoes.Api.Controllers
         {
             try
             {
-                _coordenacaoRepository.Update(coordenacao);
+                if (!_coordenacaoRepository.CoordenacaoExiste(coordenacao.Nome))
+                {
+                    _coordenacaoRepository.Update(coordenacao);
 
-                return Ok("Alteração: coordenacaoId:" + coordenacao.Id);
+                    return Ok("Alteração: coordenacaoId:" + coordenacao.Id);
+                }
+                else {
+                    return Ok($"Coordenação de nome {coordenacao.Nome} já existe. Favor escolher outro nome");
+                }
+
             }
             catch (Exception e)
             {

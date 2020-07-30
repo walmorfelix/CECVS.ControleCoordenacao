@@ -7,9 +7,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AlertModalService } from '../../shared/alert-modal-service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { ModalContentComponent } from '../../modal-content/modal-content.component';
-import { EmpregadoListaComponent } from '../../empregado/empregado-lista/empregado-lista.component';
-
 
 @Component({
   selector: 'app-coordenacao-lista',
@@ -37,32 +34,13 @@ export class CoordenacaoListaComponent implements OnInit {
   }
 
   listarEmpregados(coordenacaoId){
+    console.log(coordenacaoId);  
 
-    this.empregados = this.service.EmpregadosPorCoordenacao(coordenacaoId).subscribe(data=>{
-      this.empregados=data});
-
-
-    console.log( this.empregados);
-
-    const initialState = {
-      list: [
-        'Open a modal with component',
-        'Pass your data',
-        'Do something else',
-        '...'
-      ],
-      title: 'Modal with component'
-    };   
-
-    this.bsModalRef = this.modalService.show(EmpregadoListaComponent, {initialState});
-    this.bsModalRef.content.closeBtnName = 'Close';
-
-    console.log(coordenacaoId);
+        this.router.navigate(['./listarEmpregados', coordenacaoId], { relativeTo: this.route });         
   }
 
   onEdit(coordenacaoId) {
-    this.router.navigate(['editar', coordenacaoId], { relativeTo: this.route })
-    console.log(coordenacaoId);
+    this.router.navigate(['./editarCoordenacao', coordenacaoId], { relativeTo: this.route });   
   }
 
   onRemove(coordenacaoId){

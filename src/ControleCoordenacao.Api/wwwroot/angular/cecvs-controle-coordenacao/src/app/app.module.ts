@@ -6,12 +6,21 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal'
 import { SharedModule } from './shared/shared.module';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { EmpregadoListaComponent } from './empregado/empregado-lista/empregado-lista.component';
+import { CoordenacaoListaComponent } from './coordenacao/coordenacao-lista/coordenacao-lista.component';
+import { CoordenacaoFormComponent } from './coordenacao/coordenacao-form/coordenacao-form.component';
+import { EmpregadoFormComponent } from './empregado/empregado-form/empregado-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,       
-    EmpregadoListaComponent          
+    EmpregadoListaComponent,        
+    CoordenacaoListaComponent,
+    CoordenacaoFormComponent,
+    EmpregadoFormComponent,
+    EmpregadoListaComponent 
   ],
   entryComponents:[
     EmpregadoListaComponent
@@ -21,7 +30,10 @@ import { EmpregadoListaComponent } from './empregado/empregado-lista/empregado-l
     AppRoutingModule,
     HttpClientModule,
     ModalModule.forRoot(),
-    SharedModule
+    SharedModule,
+    CommonModule,    
+    ReactiveFormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

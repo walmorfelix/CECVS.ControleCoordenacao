@@ -53,8 +53,5 @@ export class CoordenacaoService {
     return this.http.delete(this.api + "/remover/" + id).pipe(take(1));
   }
 
-  
-  EmpregadosPorCoordenacao(coordenacaoId){
-    return this.http.get("https://localhost:44361/api/empregados/empregados-coordenacao/"+coordenacaoId).pipe(take(1));
-  }
+
 }

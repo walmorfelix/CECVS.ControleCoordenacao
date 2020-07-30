@@ -17,10 +17,12 @@ namespace ControleCoordenacoes.Api.Controllers
     public class EmpregadosController : ControllerBase
     {
         private readonly IEmpregadoRepository _empregadoRepository;
+        private readonly ICoordenacaoRepository _coordenacaoRepository;
 
-        public EmpregadosController(IEmpregadoRepository empregadoRepository)
+        public EmpregadosController(IEmpregadoRepository empregadoRepository, ICoordenacaoRepository coordenacaoRepository)
         {
             _empregadoRepository = empregadoRepository;
+            _coordenacaoRepository = coordenacaoRepository;
         }
 
         [HttpGet("get-all")]
@@ -79,13 +81,21 @@ namespace ControleCoordenacoes.Api.Controllers
         {
             try
             {
+                bool coordenacaoExiste = _coordenacaoRepository.CoordenacaoExiste(empregadoDto.Coordenacao);
+
+                if (!coordenacaoExiste)
+                {
+                    return Ok("Coordenação não existe");
+                }
+
+
                 if (!_empregadoRepository.MatriculaExiste(empregadoDto.Matricula))
                 {
                    var empregado = new Empregado {
                        Id = _empregadoRepository.ObterId() + 1,
                        Matricula = empregadoDto.Matricula,
                        Nome = empregadoDto.Nome,
-                       CoordenacaoId = 1,                       
+                       CoordenacaoId = _coordenacaoRepository.ObterCoordenacaoIdPorNome(empregadoDto.Coordenacao),                       
                        Ativo = true
                 };
                     _empregadoRepository
@@ -133,6 +143,14 @@ namespace ControleCoordenacoes.Api.Controllers
         {
             try
             {
+                bool coordenacaoExiste = _coordenacaoRepository.CoordenacaoExiste(empregadoDto.Coordenacao);
+                int coordenacaoId = _coordenacaoRepository.ObterCoordenacaoIdPorNome(empregadoDto.Coordenacao);
+
+                if (!coordenacaoExiste)
+                {
+                    return Ok("Coordenação não existe");
+                }
+
                 if (_empregadoRepository.MatriculaExiste(empregadoDto.Matricula))
                 {
                     var empregado = new Empregado
@@ -140,14 +158,14 @@ namespace ControleCoordenacoes.Api.Controllers
                         Id = empregadoDto.Id,
                         Matricula = empregadoDto.Matricula,
                         Nome = empregadoDto.Nome,
-                        CoordenacaoId = 1,
+                        CoordenacaoId = coordenacaoId,
                         Ativo = true
                     };
                     _empregadoRepository
                         .Update(empregado);
 
 
-                    return Ok($"Alterado - EmpregadoId:{empregado.Id}");
+                    return Ok($"Empregado matrícula {empregado.Matricula} alterado com sucesso.");
                 }
                 return Ok("Matrícula já existe");
             }

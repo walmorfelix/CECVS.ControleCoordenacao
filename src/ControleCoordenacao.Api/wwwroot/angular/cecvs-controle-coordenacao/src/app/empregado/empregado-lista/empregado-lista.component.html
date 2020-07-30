@@ -13,10 +13,10 @@
       <!-- <table class="table table-hover" *ngIf="(coordenacoes$ | async) as coordenacoes; else loading"></table> -->
       <thead>
         <tr>
-          <th>#</th>          
-          <th>Matrícula</th>
-          <th>Nome</th>
-          <th>Coordenação</th>
+          <th sortable-column="id">#</th>          
+          <th sortable-column="matricula">Matrícula</th>
+          <th sortable-column="nome">Nome</th>
+          <th sortable-column="coordenacao">Coordenação</th>
         </tr>
       </thead>
       <tbody>
