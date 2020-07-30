@@ -89,6 +89,16 @@ namespace ControleCoordenacao.Repository.Repositories
             return a;
         }
 
+        public IEnumerable<Empregado> ObterEmpregadosPorCoordenacao(int coordenacaoId)
+        {
+            var a = Context.Coordenacoes
+                .Where(c => c.Id == coordenacaoId)
+                .Select(e => e.Empregados)
+                .FirstOrDefault();               
+
+            return a;
+        }
+
         public int ObterId()
         {
             return Context.Empregados.Max(e => e.Id);

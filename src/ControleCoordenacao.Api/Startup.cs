@@ -47,6 +47,8 @@ namespace ControleCoordenacao.Api
             services.AddScoped<ICoordenacaoRepository, CoordenacaoRepository>();
             services.AddScoped<IEmpregadoRepository, EmpregadoRepository>();
 
+
+
             
         }
 

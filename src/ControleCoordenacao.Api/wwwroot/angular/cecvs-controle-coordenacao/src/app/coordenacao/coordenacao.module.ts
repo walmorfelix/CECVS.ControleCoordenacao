@@ -5,14 +5,19 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CoordenacaoRoutingModule } from './coordenacao-routing.module';
 import { CoordenacaoListaComponent } from './coordenacao-lista/coordenacao-lista.component';
 import { CoordenacaoFormComponent } from './coordenacao-form/coordenacao-form.component';
-
+import { EmpregadoListaComponent } from '../empregado/empregado-lista/empregado-lista.component';
 
 @NgModule({
-  declarations: [CoordenacaoListaComponent, CoordenacaoFormComponent],
+  declarations: [
+    CoordenacaoListaComponent,
+    CoordenacaoFormComponent         
+  ],
+
   imports: [
     CommonModule,
     CoordenacaoRoutingModule,
-    ReactiveFormsModule    
+    ReactiveFormsModule
+       
   ],
   providers:[    
   ]

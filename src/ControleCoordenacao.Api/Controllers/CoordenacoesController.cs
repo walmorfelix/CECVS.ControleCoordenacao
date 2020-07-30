@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace ControleCoordenacoes.Api.Controllers
 {
     [EnableCors("Development")]
     [Route("api/[Controller]")]
+    [Produces("application/json")]
     [ApiController]
     public class CoordenacoesController : ControllerBase
     {
@@ -52,6 +54,7 @@ namespace ControleCoordenacoes.Api.Controllers
                 return BadRequest(e.Message);
             }
         }
+
 
         [HttpPost("add")]
         public IActionResult PostCoordenacoes(Coordenacao coordenacao)

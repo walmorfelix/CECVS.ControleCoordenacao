@@ -79,12 +79,13 @@ export class EmpregadoFormComponent implements OnInit {
       console.log(this.empregado);
       this.service.Save(this.empregado).subscribe(
         success=>{
-          this.location.back();
+          alert(success);
+          this.location.back();          
         },
         error=>{
+          alert(error);
           this.location.back();
-        }
-      )  
+        });  
     };
   }
   onCancel() {

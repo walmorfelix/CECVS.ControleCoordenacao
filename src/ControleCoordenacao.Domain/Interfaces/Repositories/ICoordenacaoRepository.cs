@@ -10,7 +10,9 @@ namespace ControleCoordenacao.Domain.Interfaces.Repositories
         IEnumerable<Coordenacao> ListarCoodenacao();
         IEnumerable<Coordenacao> CoordenacaoById(int id);
         void AtualizarCoordenacao(Coordenacao coordenacao);
-        bool TemEmpregado(int id);        
+        bool TemEmpregado(int id);
+
+        
     }
 
 }

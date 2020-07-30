@@ -6,10 +6,15 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal'
 import { SharedModule } from './shared/shared.module';
+import { EmpregadoListaComponent } from './empregado/empregado-lista/empregado-lista.component';
 
 @NgModule({
   declarations: [
-    AppComponent,          
+    AppComponent,       
+    EmpregadoListaComponent          
+  ],
+  entryComponents:[
+    EmpregadoListaComponent
   ],
   imports: [
     BrowserModule,

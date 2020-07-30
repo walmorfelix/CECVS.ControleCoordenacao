@@ -6,12 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace ControleCoordenacoes.Api.Controllers
 {
     [EnableCors("Development")]
     [Route("api/[Controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class EmpregadosController : ControllerBase
     {
         private readonly IEmpregadoRepository _empregadoRepository;
@@ -57,6 +59,21 @@ namespace ControleCoordenacoes.Api.Controllers
             }
         }
 
+        [HttpGet("empregados-coordenacao/{coordenacaoId:int}")]
+        public IActionResult ObterEmpregadosPorCoordenacao(int coordenacaoId)
+        {
+            try
+            {
+                return Ok(_empregadoRepository.ObterEmpregadosPorCoordenacao(coordenacaoId));
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+
+        }
+
         [HttpPost("add")]
         public IActionResult PostEmpregado(EmpregadoDto empregadoDto)
         {
@@ -75,7 +92,7 @@ namespace ControleCoordenacoes.Api.Controllers
                         .Add(empregado);
 
 
-                    return Ok($"EmpregadoId:{empregado.Id}");
+                    return Ok($"Empregado matrícula: {empregado.Matricula} criado com sucesso.");
                 }
                 return Ok("Matrícula já existe");
             }
@@ -151,7 +168,7 @@ namespace ControleCoordenacoes.Api.Controllers
                     var empregado = _empregadoRepository.EmpregadoById(id).SingleOrDefault();
                     _empregadoRepository.Remove(empregado);
 
-                    return Ok($"Removido: CoordenacaoId = {id}");
+                    return Ok($"Empregado: {empregado.Matricula} - {empregado.Nome} removido com sucesso.");
                 }
                 return Ok("Empregado não localizado na base");
 

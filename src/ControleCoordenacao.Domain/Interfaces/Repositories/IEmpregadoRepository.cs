@@ -10,5 +10,7 @@ namespace ControleCoordenacao.Domain.Interfaces.Repositories
         int ObterId();
         IEnumerable<Empregado> EmpregadoById(int id);
         bool EmpregadoIdExiste(int id);
+
+        IEnumerable<Empregado> ObterEmpregadosPorCoordenacao(int coordenacaoId);
     }
 }

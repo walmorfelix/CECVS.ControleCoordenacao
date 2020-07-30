@@ -25,6 +25,11 @@
           <td>{{ coordenacao.caixaPostal }}</td>
           <td>
             <span class="float-right">
+
+                <button class="btn btn-outline-primary mb-1 btn-sm" (click)="listarEmpregados(coordenacao.coordenacaoId)">
+                    Empregados
+                  </button>
+
               <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(coordenacao.coordenacaoId)">
                 Atualizar
               </button>

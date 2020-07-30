@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { EmpregadoService } from '../empregado.service';
 import { empregado } from '../empregado';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AlertModalService } from '../../shared/alert-modal-service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-empregado-lista',
@@ -10,17 +12,39 @@ import { Router, ActivatedRoute } from '@angular/router';
   preserveWhitespaces: true
 })
 export class EmpregadoListaComponent implements OnInit {
-  empregados: empregado[];
+  empregados: any;
+  bsModalRef: BsModalRef;
 
   constructor(
     private service: EmpregadoService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private alertModal:AlertModalService,
+    private modalService: BsModalService) { }
 
   ngOnInit() {
 
-    this.service.GetAll()
-      .subscribe(data => this.empregados = data);
+    this.route.params.subscribe(
+      (params:any)=> {
+        const id = params['id'];
+
+        if(id){ //Carrega o formulário se estiver passando id
+          
+          // const empregado$ = this.service.EmpregadosPorCoordenacao(id);
+        
+          // empregado$.subscribe(empregados=>{                      
+          //   this.empregados = empregados;
+          // });
+        }else{
+              
+          this.service.GetAll()
+          .subscribe(data => this.empregados = data);
+
+        }
+      }
+    )
+
+
   }
 
   onEdit(empregadoId) {
@@ -31,12 +55,15 @@ export class EmpregadoListaComponent implements OnInit {
   onRemove(empregadoId){
     this.service.Remove(empregadoId)
       .subscribe(
+
         success=>{
-          window.location.reload();
+          alert(success);
+          window.location.reload();          
         },
         error=>{
-          window.location.reload();
-        }
+          alert(error);
+          window.location.reload(); 
+        }        
       );
   }
     
