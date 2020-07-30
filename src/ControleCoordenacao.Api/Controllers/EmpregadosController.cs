@@ -66,7 +66,24 @@ namespace ControleCoordenacoes.Api.Controllers
         {
             try
             {
-                return Ok(_empregadoRepository.ObterEmpregadosPorCoordenacao(coordenacaoId));
+                var empregados = _empregadoRepository.ObterEmpregadosPorCoordenacao(coordenacaoId);
+                var empregadosDto = new List<EmpregadoDto>();
+                foreach (var empregado in empregados)
+                {
+                    var empregadoDto = new EmpregadoDto
+                    {
+                        Id = empregado.Id,
+                        Matricula = empregado.Matricula,
+                        Nome = empregado.Nome,
+                        Coordenacao = _empregadoRepository.ObterCoordenacao(empregado.CoordenacaoId),
+                        CoordenacaoId = empregado.CoordenacaoId,
+                        Ativo = true
+                    };
+
+                    empregadosDto.Add(empregadoDto);
+
+                }
+                return Ok(empregadosDto);
 
             }
             catch (Exception e)
