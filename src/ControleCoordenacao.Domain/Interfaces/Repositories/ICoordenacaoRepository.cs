@@ -11,6 +11,7 @@ namespace ControleCoordenacao.Domain.Interfaces.Repositories
         IEnumerable<Coordenacao> CoordenacaoById(int id);
         void AtualizarCoordenacao(Coordenacao coordenacao);
         bool TemEmpregado(int id);
+        int ObterCoordenacaoIdPorNome(string nome);
 
         
     }

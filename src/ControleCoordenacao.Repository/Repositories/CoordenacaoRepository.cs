@@ -79,6 +79,11 @@ namespace ControleCoordenacao.Repository.Repositories
                 .Include(e => e.Empregados);
         }
 
+        public int ObterCoordenacaoIdPorNome(string nome)
+        {
+            return Context.Coordenacoes.Where(c => c.Nome == nome).Select(c=>c.Id).SingleOrDefault();
+        }
+
         public int ObterId()
         {
             return Context.Coordenacoes.Max(c => c.Id);
